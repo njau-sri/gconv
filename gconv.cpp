@@ -87,7 +87,7 @@ namespace
 
 int gconv(int argc, char *argv[])
 {
-    std::cerr << "gconv (Built on " __DATE__ " " __TIME__ ")\n";
+    std::cerr << "GCONV (Built on " __DATE__ " " __TIME__ ")\n";
 
     CmdLine cmd("gconv [options]");
 
