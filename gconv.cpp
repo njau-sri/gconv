@@ -6,6 +6,7 @@
 #include "vcfio.h"
 #include "pedio.h"
 #include "hmpio.h"
+#include "genoio.h"
 
 namespace
 {
@@ -14,6 +15,7 @@ namespace
         std::string vcf;
         std::string ped;
         std::string hmp;
+        std::string geno;
         std::string out;
         bool sort = false;
     };
@@ -94,7 +96,8 @@ int gconv(int argc, char *argv[])
     cmd.add("--vcf", "VCF genotype file", "");
     cmd.add("--ped", "PLINK ped file (map file has same basename)", "");
     cmd.add("--hmp", "HapMap genotype file", "");
-    cmd.add("--out", "output file with format suffix (.vcf/.ped/.hmp)", "");
+    cmd.add("--geno", "General genotype file", "");
+    cmd.add("--out", "output file with format suffix (.vcf/.ped/.hmp/.geno)", "");
     cmd.add("--sort", "sorting loci in ascending chromosome position order");
 
     if (argc < 2) {
@@ -107,6 +110,7 @@ int gconv(int argc, char *argv[])
     par.vcf = cmd.get("--vcf");
     par.ped = cmd.get("--ped");
     par.hmp = cmd.get("--hmp");
+    par.geno = cmd.get("--geno");
     par.out = cmd.get("--out");
     par.sort = cmd.has("--sort");
 
@@ -129,6 +133,10 @@ int gconv(int argc, char *argv[])
         if (read_hmp(par.hmp, gt) != 0)
             return 1;
     }
+    else if (!par.geno.empty()) {
+        if (read_geno(par.geno, gt) != 0)
+            return 1;
+    }
 
     std::cerr << "INFO: " << gt.ind.size() << " individuals, " << gt.loc.size() << " loci\n";
 
@@ -146,6 +154,10 @@ int gconv(int argc, char *argv[])
     }
     else if (ends_with(par.out, ".hmp")) {
         if (write_hmp(gt, par.out) != 0)
+            return 1;
+    }
+    else if (ends_with(par.out, ".geno")) {
+        if (write_geno(gt, par.out) != 0)
             return 1;
     }
     else {
