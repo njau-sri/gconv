@@ -1,16 +1,16 @@
 # gconv
 
-Genotype file format conversion between [Variant Call Format (VCF)](https://samtools.github.io/hts-specs/), [PED/MAP](http://zzz.bwh.harvard.edu/plink/data.shtml#ped), [HapMap](https://bitbucket.org/tasseladmin/tassel-5-source/wiki/UserManual/Load/Load#markdown-header-hapmap) and general genotype file format.
+Genotype file format conversion between [Variant Call Format (VCF)](https://samtools.github.io/hts-specs/), [PED/MAP](http://zzz.bwh.harvard.edu/plink/data.shtml#ped), [HapMap](https://bitbucket.org/tasseladmin/tassel-5-source/wiki/UserManual/Load/Load#markdown-header-hapmap) and the general genotype file format (see below).
 
 # Command line options
 
 ```
 usage: gconv [options]
-  --geno <>     general genotype file
-  --hmp  <>     HapMap genotype file
-  --out  <>     output file with format suffix (.vcf/.ped/.hmp/.geno)
-  --ped  <>     PLINK ped file (map file has same basename)
-  --vcf  <>     VCF genotype file
+  --geno  <>    general genotype file
+  --hmp   <>    HapMap genotype file
+  --out   <>    output file with format suffix (.vcf/.ped/.hmp/.geno)
+  --ped   <>    PLINK ped file (map file has same basename)
+  --vcf   <>    VCF genotype file
   --sort        sorting loci in ascending chromosome position order
 ```
 
