@@ -65,10 +65,10 @@ void Dialog::on_buttonBox_accepted()
 
     QStringList args;
 
-    if ( ui->lineEditIn->text().isEmpty() )
+    if ( ! ui->lineEditIn->text().isEmpty() )
         args << format.at(ui->comboBoxIn->currentIndex()) << ui->lineEditIn->text();
 
-    if ( ui->lineEditOut->text().isEmpty() )
+    if ( ! ui->lineEditOut->text().isEmpty() )
         args << QLatin1String("--out") << ui->lineEditOut->text() + suffix.at(ui->comboBoxOut->currentIndex());
 
     if ( ui->checkBoxSort->isChecked() )
