@@ -1,0 +1,46 @@
+#!/bin/bash
+
+rm -rf gconv-$1
+mkdir gconv-$1
+make distclean
+
+if [ $1 == "lnx64" ]; then
+
+    g++ *.cpp -o gconv-$1/gconv -s -O2 -std=c++11 -static
+    qmake-qt4 gui
+    make
+    strip gconv-gui
+    mv gconv-gui gconv-$1/
+
+elif [ $1 == "win32" ]; then
+
+    i686-w64-mingw32-g++ *.cpp -o gconv-$1/gconv.exe -s -O2 -std=c++11 -static
+    i686-w64-mingw32-qmake-qt4 gui
+    make
+    i686-w64-mingw32-strip release/gconv-gui.exe
+    mv release/gconv-gui.exe gconv-$1/
+
+elif [ $1 == "win64" ]; then
+
+    x86_64-w64-mingw32-g++ *.cpp -o gconv-$1/gconv.exe -s -O2 -std=c++11 -static
+    x86_64-w64-mingw32-qmake-qt4 gui
+    make
+    x86_64-w64-mingw32-strip release/gconv-gui.exe
+    mv release/gconv-gui.exe gconv-$1/
+
+elif [ $1 == "macos" ]; then
+
+    export PATH="/usr/local/opt/qt/bin:$PATH"
+    export LDFLAGS="-L/usr/local/opt/qt/lib"
+    export CPPFLAGS="-I/usr/local/opt/qt/include"
+
+    make distclean
+    qmake
+    make
+    macdeployqt gconv-gui.app
+    mv gconv gconv-gui.app
+    mv -r gconv-gui.app gconv-$1/
+
+fi
+
+tar zcf gconv-$1.tar.gz gconv-$1
