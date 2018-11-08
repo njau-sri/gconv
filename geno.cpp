@@ -128,6 +128,26 @@ int check_compat_iupac(const Genotype &gt)
     return 0;
 }
 
+int check_homozygous(const Genotype &gt)
+{
+    auto n = gt.ind.size();
+    auto k = static_cast<size_t>(gt.ploidy);
+
+    for (auto &v : gt.dat) {
+        for (size_t i = 0; i < n; ++i) {
+            auto ii = i * k;
+            allele_t a = v[ii];
+            for (size_t j = 1; j < k; ++j) {
+                auto b = v[ii+j];
+                if (a != b)
+                    return 1;
+            }
+        }
+    }
+
+    return 0;
+}
+
 int read_genotype_char(const std::string &filename, Genotype &gt)
 {
     std::ifstream ifs(filename);
@@ -352,6 +372,7 @@ int write_geno(const Genotype &gt, const std::string &filename)
     auto n = gt.ind.size();
     bool haploid = gt.ploidy == 1;
     bool iupac = check_compat_iupac(gt) == 0;
+    bool homo = gt.ploidy > 1 && (check_homozygous(gt) == 0);
     const std::string missing = iupac ? "N" : "?";
 
     std::string line;
@@ -383,8 +404,10 @@ int write_geno(const Genotype &gt, const std::string &filename)
                 }
                 else {
                     line.append(a == 0 ? missing : gt.allele[j][a-1]);
-                    line.push_back('/');
-                    line.append(b == 0 ? missing : gt.allele[j][b-1]);
+                    if ( ! homo ) {
+                        line.push_back('/');
+                        line.append(b == 0 ? missing : gt.allele[j][b-1]);
+                    }
                 }
             }
         }
