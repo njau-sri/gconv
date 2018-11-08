@@ -55,7 +55,7 @@ void CmdLine::show() const
     auto n = arg.size();
     std::cerr << std::left;
     for (size_t i = 0; i < n; ++i)
-        std::cerr << std::setw(w) << arg[i] << "  " << msg[i] << "\n";
+        std::cerr << "  " << std::setw(w) << arg[i] << "  " << msg[i] << "\n";
     std::cerr << "\n";
 }
 

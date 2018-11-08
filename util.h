@@ -14,6 +14,8 @@ bool starts_with(const std::string &s1, const std::string &s2);
 
 bool ends_with(const std::string &s1, const std::string &s2);
 
+std::vector<std::string> split(const std::string &str, const std::string &sep);
+
 std::string join(const std::vector<std::string> &vs, const std::string &sep);
 
 
@@ -27,6 +29,34 @@ std::size_t index(const std::vector<T1> &v, const T2 &a)
             break;
 
     return i;
+}
+
+template<typename T1, typename T2>
+std::size_t count(const std::vector<T1> &v, const T2 &a)
+{
+    size_t c = 0;
+
+    auto n = v.size();
+    for (size_t i = 0; i < n; ++i) {
+        if (v[i] == a)
+            ++c;
+    }
+
+    return c;
+}
+
+template<typename T1, typename T2>
+std::size_t count_if(const std::vector<T1> &v, const T2 &pred)
+{
+    size_t c = 0;
+
+    auto n = v.size();
+    for (size_t i = 0; i < n; ++i) {
+        if ( pred(v[i]) )
+            ++c;
+    }
+
+    return c;
 }
 
 template<typename T>
