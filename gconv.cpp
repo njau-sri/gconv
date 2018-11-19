@@ -64,7 +64,7 @@ void sort_chrpos(Genotype &gt)
 
 int gconv(int argc, char *argv[])
 {
-    std::cerr << "GCONV (Built on " __DATE__ " " __TIME__ ")\n";
+    std::cerr << "GCONV 2019.0.dev (Built on " __DATE__ " " __TIME__ ")\n";
 
     CmdLine cmd;
 
