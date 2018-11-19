@@ -248,7 +248,7 @@ int read_genotype_char(const std::string &filename, Genotype &gt)
             a = a == 0 ? 0 : static_cast<allele_t>( index(u,a) + 1 );
     }
 
-    gt.ploidy = static_cast<int>(ploidy);
+    gt.ploidy = iupac ? 2 : static_cast<int>(ploidy);
 
     return 0;
 }
