@@ -16,6 +16,8 @@ Dialog::Dialog(QWidget *parent) :
     proc_->setProcessChannelMode(QProcess::MergedChannels);
     connect(proc_, SIGNAL(readyReadStandardOutput()), this, SLOT(slot_proc_readyReadStandardOutput()));
     connect(proc_, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(slot_proc_finished(int,QProcess::ExitStatus)));
+
+    setWindowTitle(QLatin1String("GCONV 2019.0.dev"));
 }
 
 Dialog::~Dialog()

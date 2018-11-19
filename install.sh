@@ -1,5 +1,7 @@
 #!/bin/bash
 
+VER=2019.0.dev
+
 rm -rf gconv-$1
 mkdir gconv-$1
 make distclean
@@ -43,4 +45,4 @@ elif [ $1 == "macos" ]; then
 
 fi
 
-tar zcf gconv-$1.tar.gz gconv-$1
+tar zcf gconv-${VER}-${1}.tar.gz gconv-$1
