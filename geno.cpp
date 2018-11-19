@@ -130,18 +130,15 @@ int check_compat_iupac(const Genotype &gt)
 
 int check_homozygous(const Genotype &gt)
 {
+    if (gt.ploidy != 2)
+        return 0;
+
     auto n = gt.ind.size();
-    auto k = static_cast<size_t>(gt.ploidy);
 
     for (auto &v : gt.dat) {
         for (size_t i = 0; i < n; ++i) {
-            auto ii = i * k;
-            allele_t a = v[ii];
-            for (size_t j = 1; j < k; ++j) {
-                auto b = v[ii+j];
-                if (a != b)
-                    return 1;
-            }
+            if (v[i*2] != v[i*2+1])
+                return 1;
         }
     }
 
@@ -187,9 +184,9 @@ int read_genotype_char(const std::string &filename, Genotype &gt)
             continue;
 
         if (ploidy == 0) {
-            ploidy = vt.size() > 3 + n ? (vt.size() - 3) / n : 1;
+            ploidy = vt.size() > (3 + n) ? (vt.size() - 3) / n : 1;
             if (ploidy > 2) {
-                std::cerr << "ERROR: unsupported polyploidy (" << ploidy << ") genotype data: "
+                std::cerr << "ERROR: polyploidy (" << ploidy << ") genotype is not supported: "
                           << vt[0].to_string() << "\n";
                 return 1;
             }
@@ -293,9 +290,9 @@ int read_genotype_string(const std::string &filename, Genotype &gt)
             continue;
 
         if (ploidy == 0) {
-            ploidy = vt.size() > 3 + n ? (vt.size() - 3) / n : 1;
+            ploidy = vt.size() > (3 + n) ? (vt.size() - 3) / n : 1;
             if (ploidy > 2) {
-                std::cerr << "ERROR: unsupported polyploidy (" << ploidy <<") genotype data: "
+                std::cerr << "ERROR: polyploidy (" << ploidy <<") genotype is not supported: "
                           << vt[0].to_string() << "\n";
                 return 1;
             }
@@ -370,9 +367,9 @@ int write_geno(const Genotype &gt, const std::string &filename)
 
     auto m = gt.loc.size();
     auto n = gt.ind.size();
-    bool haploid = gt.ploidy == 1;
+    bool haploid = gt.ploidy != 2;
     bool iupac = check_compat_iupac(gt) == 0;
-    bool homo = gt.ploidy > 1 && (check_homozygous(gt) == 0);
+    bool homo = check_homozygous(gt) == 0;
     const std::string missing = iupac ? "N" : "?";
 
     std::string line;

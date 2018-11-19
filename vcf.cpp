@@ -10,6 +10,8 @@ using std::size_t;
 
 namespace {
 
+
+// parse GT, return ploidy number (1 or 2), otherwise error
 int parse_vcf_gt(const char *s, size_t n, int &a, int &b)
 {
     auto beg = s;
@@ -43,7 +45,7 @@ int parse_vcf_gt(const char *s, size_t n, int &a, int &b)
     }
 
     if (std::count(beg, end, '/') + std::count(beg, end, '|') > 1) {
-        std::cerr << "ERROR: unsuppored polyploidy genotype: " << std::string(beg, end) << "\n";
+        std::cerr << "ERROR: polyploidy genotype is not supported: " << std::string(beg,end) << "\n";
         return -1;
     }
 
@@ -74,6 +76,7 @@ int parse_vcf_gt(const char *s, size_t n, int &a, int &b)
 
     return 2;
 }
+
 
 } // namespace
 
@@ -153,7 +156,8 @@ int parse_vcf_entry(const std::string &s, VcfEntry &e)
     for (size_t i = 9; i < n; ++i) {
         int a = -9, b = -9;
         int info = parse_vcf_gt(v[i].data(), v[i].size(), a, b);
-        if (info < 0 || a >= na || b >= na) {
+
+        if ((info != 1 && info != 2) || a >= na || b >= na) {
             std::cerr << "ERROR: invalid genotype data: " << v[i].to_string() << "\n";
             return 1;
         }
@@ -214,7 +218,7 @@ int read_vcf(const std::string &filename, Genotype &gt)
         if (parse_vcf_entry(line, e) != 0)
             return 1;
 
-        if (gt.ploidy < 0)
+        if (gt.ploidy <= 0)
             gt.ploidy = e.ploidy;
 
         if (e.ploidy != gt.ploidy) {
@@ -263,7 +267,7 @@ int write_vcf(const Genotype & gt, const std::string & filename, bool force_dipl
 
     std::string line;
     auto m = gt.loc.size();
-    bool haploid = gt.ploidy == 1;
+    bool haploid = gt.ploidy != 2;
 
     for (size_t j = 0; j < m; ++j) {
         ofs << gt.chr[j] << "\t" << gt.pos[j] << "\t" << gt.loc[j] << "\t";

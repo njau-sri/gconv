@@ -257,7 +257,7 @@ int write_ped(const Genotype &gt, const std::string &filename)
 
     auto m = gt.loc.size();
     auto n = gt.ind.size();
-    bool haploid = gt.ploidy == 1;
+    bool haploid = gt.ploidy != 2;
 
     std::vector<std::string> fid, iid;
     parse_fid_iid(gt.ind, fid, iid);

@@ -212,7 +212,7 @@ int write_hmp(const Genotype &gt, const std::string &filename)
 
     auto m = gt.loc.size();
     auto n = gt.ind.size();
-    bool haploid = gt.ploidy == 1;
+    bool haploid = gt.ploidy != 2;
 
     std::vector<char> indel(m, 0);
     for (size_t j = 0; j < m; ++j) {

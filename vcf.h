@@ -41,8 +41,8 @@ struct VcfEntry
     std::string id;
     std::vector<std::string> as;
     std::vector<allele_t> gt;
-    int pos = -1;
-    int ploidy = -1;
+    int pos = 0;
+    int ploidy = 0;
 };
 
 
@@ -54,7 +54,7 @@ struct Genotype
     std::vector<int> pos;
     std::vector< std::vector<allele_t> > dat;
     std::vector< std::vector<std::string> > allele;
-    int ploidy = -1;
+    int ploidy = 0;
 };
 
 
