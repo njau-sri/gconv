@@ -8,11 +8,11 @@ Genotype file format conversion between [Variant Call Format (VCF)](https://samt
 
 ```
 usage: gconv [options]
-  --geno  <>    general genotype file
-  --hmp   <>    HapMap genotype file
-  --out   <>    output file with format suffix (.vcf/.ped/.hmp/.geno)
-  --ped   <>    PLINK ped file (map file has same basename)
-  --vcf   <>    VCF genotype file
+  --geno  <>    Input general genotype file
+  --hmp   <>    Input HapMap genotype file
+  --out   <>    Output file with format suffix (.vcf/.ped/.hmp/.geno)
+  --ped   <>    Input PLINK ped file (map file has same basename)
+  --vcf   <>    Input VCF genotype file
   --sort        sorting loci in ascending chromosome position order
 ```
 
