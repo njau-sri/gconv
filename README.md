@@ -16,7 +16,7 @@ usage: gconv [options]
   --sort        sorting loci in ascending chromosome position order
 ```
 
-# General genotype file format
+# General genotype file format (.geno)
 
 Each row is a marker, each column is an individual. The first row contains column names and individual names. The first three columns are marker names, chromosome labels and genome positions, respectively.
 
