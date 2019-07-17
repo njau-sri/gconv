@@ -20,7 +20,7 @@ if [ $1 == "glnx64" ]; then
 elif [ $1 == "win32" ]; then
 
     i686-w64-mingw32-g++ src/*.cpp -o $PKG/gconv.exe -s -O2 -std=c++11 -static
-    i686-w64-mingw32-qmake-qt4 src/gui
+    i686-w64-mingw32-qmake-qt4 "CONFIG += static" src/gui
     make release
     i686-w64-mingw32-strip release/gconv-gui.exe
     mv release/gconv-gui.exe $PKG/
@@ -28,7 +28,7 @@ elif [ $1 == "win32" ]; then
 elif [ $1 == "win64" ]; then
 
     x86_64-w64-mingw32-g++ src/*.cpp -o $PKG/gconv.exe -s -O2 -std=c++11 -static
-    x86_64-w64-mingw32-qmake-qt4 src/gui
+    x86_64-w64-mingw32-qmake-qt4 "CONFIG += static" src/gui
     make release
     x86_64-w64-mingw32-strip release/gconv-gui.exe
     mv release/gconv-gui.exe $PKG/
