@@ -11,7 +11,7 @@
 
 
 #ifndef GCONV_VERSION
-#define GCONV_VERSION  "v1.0.dev"
+#define GCONV_VERSION  "v1.0"
 #endif
 
 using std::size_t;

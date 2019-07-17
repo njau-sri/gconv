@@ -6,7 +6,7 @@
 #include "ui_dialog.h"
 
 #ifndef GCONV_VERSION
-#define GCONV_VERSION  "v1.0.dev"
+#define GCONV_VERSION  "v1.0"
 #endif
 
 Dialog::Dialog(QWidget *parent) :
