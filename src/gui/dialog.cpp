@@ -5,6 +5,10 @@
 #include "dialog.h"
 #include "ui_dialog.h"
 
+#ifndef GCONV_VERSION
+#define GCONV_VERSION  "v1.0.dev"
+#endif
+
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog),
@@ -17,7 +21,7 @@ Dialog::Dialog(QWidget *parent) :
     connect(proc_, SIGNAL(readyReadStandardOutput()), this, SLOT(slot_proc_readyReadStandardOutput()));
     connect(proc_, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(slot_proc_finished(int,QProcess::ExitStatus)));
 
-    setWindowTitle(QLatin1String("GCONV 2019.0.dev"));
+    setWindowTitle(QLatin1String("GCONV " GCONV_VERSION));
 }
 
 Dialog::~Dialog()
@@ -52,6 +56,15 @@ void Dialog::on_pushButtonOut_clicked()
 void Dialog::on_buttonBox_accepted()
 {
     QString prog = QDir(QApplication::applicationDirPath()).filePath(QLatin1String("gconv"));
+#ifdef Q_OS_DARWIN
+    if (prog.endsWith(QLatin1String(".app/Contents/MacOS"))) {
+        QDir dir(prog);
+        dir.cdUp();
+        dir.cdUp();
+        dir.cdUp();
+        prog = exe.absolutePath();
+    }
+#endif
 
     QStringList format, suffix;
 
