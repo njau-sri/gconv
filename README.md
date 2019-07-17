@@ -2,8 +2,6 @@
 
 Genotype file format conversion between [Variant Call Format (VCF)](https://samtools.github.io/hts-specs/), [PED/MAP](http://zzz.bwh.harvard.edu/plink/data.shtml#ped), [HapMap](https://bitbucket.org/tasseladmin/tassel-5-source/wiki/UserManual/Load/Load#markdown-header-hapmap) and the general genotype file format (see below).
 
-[![Download gconv](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/rtm-gwas/files/related/gconv/)
-
 # Command line options
 
 ```
