@@ -9,7 +9,7 @@ mkdir $PKG
 
 make distclean
 
-if [ $1 == "lnx64" ]; then
+if [ $1 == "glnx64" ]; then
 
     g++ src/*.cpp -o $PKG/gconv -s -O2 -std=c++11 -static
     qmake-qt5 src/gui
