@@ -2,7 +2,15 @@
 
 Genotype file format conversion between [Variant Call Format (VCF)](https://samtools.github.io/hts-specs/), [PED/MAP](http://zzz.bwh.harvard.edu/plink/data.shtml#ped), [HapMap](https://bitbucket.org/tasseladmin/tassel-5-source/wiki/UserManual/Load/Load#markdown-header-hapmap) and the general genotype file format (see below).
 
-# Command line options
+## Download
+
+https://github.com/njau-sri/gconv/releases
+
+### 中国下载镜像
+
+腾讯微云分享链接 https://share.weiyun.com/5NKUT0T
+
+## Command line options
 
 ```
 usage: gconv [options]
@@ -14,7 +22,7 @@ usage: gconv [options]
   --sort        sorting loci in ascending chromosome position order
 ```
 
-# General genotype file format (.geno)
+## General genotype file format (.geno)
 
 Each row is a marker, each column is an individual. The first row contains column names and individual names. The first three columns are marker names, chromosome labels and genome positions, respectively.
 
