@@ -10,6 +10,10 @@
 #include "util.h"
 
 
+#ifndef GCONV_VERSION
+#define GCONV_VERSION  "v1.0.dev"
+#endif
+
 using std::size_t;
 
 
@@ -64,7 +68,7 @@ void sort_chrpos(Genotype &gt)
 
 int gconv(int argc, char *argv[])
 {
-    std::cerr << "GCONV 2019.0.dev (Built on " __DATE__ " " __TIME__ ")\n";
+    std::cerr << "GCONV " GCONV_VERSION " (Built on " __DATE__ " " __TIME__ ")\n";
 
     CmdLine cmd;
 
