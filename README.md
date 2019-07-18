@@ -14,7 +14,7 @@ https://github.com/njau-sri/gconv/releases
 
 ```
 usage: gconv [options]
-  --geno  <>    Input general genotype file
+  --geno  <>    Input legacy genotype file
   --hmp   <>    Input HapMap genotype file
   --out   <>    Output file with format suffix (.vcf/.ped/.hmp/.geno)
   --ped   <>    Input PLINK ped file (map file has same basename)
