@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VER=v1.0
+VER=v1.1.dev
 
 PKG=gconv-$VER-$1
 
