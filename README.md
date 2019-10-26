@@ -6,10 +6,6 @@ Genotype file format conversion between [Variant Call Format (VCF)](https://samt
 
 https://github.com/njau-sri/gconv/releases
 
-### 中国下载镜像
-
-腾讯微云分享链接 https://share.weiyun.com/5NKUT0T
-
 ## Command line options
 
 ```
